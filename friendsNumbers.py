@@ -1,3 +1,4 @@
+# 可以改进的方向
 # 1.这个可以改进的有登录一次是不是后续不用再扫码登录
 # 2.好友比例柱状图显示数值
 # 3.好友的省市分布情况
@@ -13,16 +14,20 @@ def draw(datas):
     plt.xlabel('sex')
     plt.ylabel('rate')
     plt.title("Gender of Alfred's friends")
+    # 使用plt.text()来实现柱状图显示数值
+    # for a, b  in zip(x, y):
+    #     plt.text(a, b + 0.05, '%.0f' % b, ha='center', va='bottom', fontsize=11)
     plt.show()
 
 def parse_friedns():
-    itchat.login()
+    # itchat.login() 每次登陆都需重新扫码
+    # itchat.auto_login(hotReload=True) 暂时保存登陆信息
+    itchat.auto_login(hotReload=True)
     text = dict()
-    numbers=itchat.get_friends(update=True)
-    print(len(numbers))
     friedns = itchat.get_friends(update=True)[0:]
-    print(numbers)
     print(friedns)
+    print(len(friedns))
+
     male = "male"
     female = "female"
     other = "other"
