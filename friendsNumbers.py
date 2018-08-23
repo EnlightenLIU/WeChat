@@ -7,8 +7,14 @@ from matplotlib import pyplot as plt
 
 
 def draw(datas):
+    b=[]
     for key in datas.keys():
-        plt.bar(key, datas[key])
+        plt.bar(key, datas[key])# 柱状图
+        b.append(datas[key])
+
+    a = datas.keys()
+    for x, y in zip(a, b):
+        plt.text(x, y, str(y), ha='center', va='bottom', fontsize=11)
 
     plt.legend()
     plt.xlabel('sex')
