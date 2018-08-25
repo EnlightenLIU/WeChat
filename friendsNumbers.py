@@ -4,6 +4,7 @@
 # 3.好友的省市分布情况
 import itchat
 from matplotlib import pyplot as plt
+import pandas as pd
 
 
 def draw(datas):
@@ -13,16 +14,14 @@ def draw(datas):
         b.append(datas[key])
 
     a = datas.keys()
+    # 使用plt.text()来实现柱状图显示数值
     for x, y in zip(a, b):
-        plt.text(x, y, str(y), ha='center', va='bottom', fontsize=11)
+        plt.text(x, y, y, ha='center', va='bottom', fontsize=11)
 
     plt.legend()
     plt.xlabel('sex')
     plt.ylabel('rate')
     plt.title("Gender of Alfred's friends")
-    # 使用plt.text()来实现柱状图显示数值
-    # for a, b  in zip(x, y):
-    #     plt.text(a, b + 0.05, '%.0f' % b, ha='center', va='bottom', fontsize=11)
     plt.show()
 
 def parse_friedns():
@@ -33,6 +32,12 @@ def parse_friedns():
     friedns = itchat.get_friends(update=True)[0:]
     print(friedns)
     print(len(friedns))
+
+    df_friends=pd.DataFrame(friedns)
+    City=df_friends.City
+    City_count=City.value_counts()
+    City_count=City_count[City_count.index != '']
+    print(City_count)
 
     male = "male"
     female = "female"
